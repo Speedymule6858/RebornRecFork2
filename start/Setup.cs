@@ -19,6 +19,7 @@ internal class Setup
 		Directory.CreateDirectory("SaveData/Photos");
 		Directory.CreateDirectory("SaveData/Rooms");
 		Directory.CreateDirectory("SaveData/Inventions");
+		Directory.CreateDirectory("SaveData/RoomImages");
 		if (!File.Exists("SaveData/App/firsttime.txt"))
 		{
 			File.WriteAllText("SaveData/App/firsttime.txt", "this text file has no use other than to tell the program whether to bring up the intro or not, so i can just write random shit here. among us balls, you suck mad dick you big fat tr----");

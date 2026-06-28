@@ -72,8 +72,31 @@ internal class ImageServer
                     }
                     else if (text.Contains(".jpg") && !text.StartsWith("/DefaultRoomImage.jpg"))
                     {
+                        // Check for room images in SaveData/RoomImages folder first
+                        string imageName = null;
                         int num = text.IndexOf('?');
                         if (num != -1)
+                        {
+                            imageName = text.AsSpan(0, num).ToString();
+                        }
+                        else if (text.StartsWith("//img/"))
+                        {
+                            imageName = text.AsSpan(6).ToString();
+                        }
+                        else
+                        {
+                            imageName = text;
+                        }
+
+                        // Extract just the filename without path
+                        string fileName = Path.GetFileName(imageName);
+                        string roomImagePath = "SaveData/RoomImages/" + fileName;
+
+                        if (File.Exists(roomImagePath))
+                        {
+                            array = File.ReadAllBytes(roomImagePath);
+                        }
+                        else if (num != -1)
                         {
                             if (File.Exists("SaveData//Photos/" + text.AsSpan(0, num).ToString()))
                             {
